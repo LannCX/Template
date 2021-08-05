@@ -26,7 +26,7 @@ def parse_args():
                         type=str)
 
     parser.add_argument('opts',
-                        help="Modify config options using the command-line",
+                        help="Modify cfg options using the command-line",
                         default=None,
                         nargs=argparse.REMAINDER)
 

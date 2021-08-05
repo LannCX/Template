@@ -5,5 +5,7 @@ __pycache__/
 *.pyc
 
 # Uncomment following items then push your project
-# assets/
-# datasets/
+assets/
+checkpoints/
+log/
+models/

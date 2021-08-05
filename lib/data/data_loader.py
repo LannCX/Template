@@ -1,5 +1,5 @@
 import importlib
-from torch.utils.data import DataLoader
+from data import DataLoader, DataloderX
 
 
 def find_dataset_using_name(dataset_name):
@@ -26,16 +26,25 @@ def find_dataset_using_name(dataset_name):
     return dataset
 
 
-def customer_data_loader(cfg, phase):
+def customer_data_loader(cfg, phase, **kargs):
     dataset_class = find_dataset_using_name(cfg.DATASET.NAME)
-    dataset_obj = dataset_class(cfg, phase)
+    dataset_obj = dataset_class(cfg, phase, **kargs)
 
     batchSize = cfg.TRAIN.BATCH_SIZE if phase=='train' else cfg.TEST.BATCH_SIZE
     shuffle = cfg.TRAIN.SHUFFLE if phase=='train' else False
+    drop_last = cfg.TRAIN.DROP_LAST
 
-    data_loader = DataLoader(dataset=dataset_obj,
-                             batch_size=batchSize,
-                             shuffle=shuffle,
-                             num_workers=int(cfg.WORKERS))
+    if cfg.TRAIN.PRE_FRFETCH:
+        data_loader = DataloderX(dataset=dataset_obj,
+                                 batch_size=batchSize,
+                                 shuffle=shuffle,
+                                 num_workers=int(cfg.WORKERS),
+                                 pin_memory=True)
+    else:
+        data_loader = DataLoader(dataset=dataset_obj,
+                                 batch_size=batchSize,
+                                 shuffle=shuffle,
+                                 num_workers=int(cfg.WORKERS),
+                                 pin_memory=True)
 
     return data_loader

@@ -1,0 +1,58 @@
+AUTO_RESUME: false
+GPUS: (0,1)
+WORKERS: 12
+SAVE_FREQ: 5000
+PRINT_FREQ: 500
+PRINT_PARAM: true
+IS_TRAIN: true
+USE_VAL: true
+SNAPSHOT_PREF: 'imagenet.layer4'
+
+DATASET:
+  ROOT: '/raid/data/something-something/v1/imgs'
+  ANNO_FILE: '/raid/chenxu/Code/AK-Net/pre_processing/something/v1/%s-%s.csv'
+  CLS_FILE: '/raid/chenxu/Code/AK-Net/pre_processing/something/v1/%s-labels.csv'
+  NAME: 'something'
+  VERSION: 'v1'
+  N_SEGMENT: 8
+  SCALE_SIZE: (256, 256)
+  CROP_SIZE: (224, 224)
+  TEST_SET: 'validation'
+  DATA_TYPE: 'img'
+  IMG_FORMAT: '{:05d}.jpg'
+  SAMP_MODE: 'global'
+
+MODEL:
+  NUM_CLASSES: 174
+  NAME: AKNet
+  POINT_RATIO: 0.3
+  USE_POINT: false
+  ENDPOINT: 'layer4'
+  POINT_NETWORK: 'GCN'  # 'PointNet', 'PointNet++', 'Transformer'
+  HIST_SHOW_NAME: []
+  PRETRAINED: ''
+
+TRAIN:
+  WARM_UP: false
+  WARM_UP_EPOCHS: 10
+  PRE_FRFETCH: true
+  BATCH_SIZE: 32
+  SHUFFLE: true
+  BEGIN_EPOCH: 1
+  END_EPOCH: 50
+  OPTIMIZER: sgd
+  LR_SCHEDULER: multistep
+  LR: 0.01
+  WD: 1e-4
+  MOMENTUM: 0.9
+  LR_FACTOR: 0.1
+  LR_STEP:
+    - 20
+    - 40
+
+TEST:
+  VAL_FREQ: 1
+  INIT_VAL: true
+  BATCH_SIZE: 24
+  LOAD_WEIGHT: ''
+  NUM_CROPS: 1

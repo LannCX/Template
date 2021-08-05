@@ -1,0 +1,20 @@
+{
+  "Underconstrained_flicker": 0,
+  "Rotary_side_view": 1,
+  "Turbulance": 2,
+  "Superimposed_motions": 3,
+  "Wavy_motion": 4,
+  "Chaotic_motion": 5,
+  "Dominant_rigid": 6,
+  "Dominant_multiple_objects": 7,
+  "Explosion_Divergence": 8,
+  "Scintillation": 9,
+  "Stochastic_motion": 10,
+  "Geyser": 11,
+  "Superimposed_translation_and_stochastic": 12,
+  "Underconstrained_blinking": 13,
+  "Rotary_motion": 14,
+  "Dominant_non-rigid": 15,
+  "Underconstrained_aperture_problem": 16,
+  "Pluming": 17
+}

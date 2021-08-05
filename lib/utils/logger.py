@@ -64,10 +64,3 @@ class Logger:
 
     def add_histogram(self, *args, **kwargs):
         self.writer.add_histogram(*args, **kwargs)
-
-
-if __name__ == '__main__':
-    lger = Logger('', 'cfg', 'train')
-    lger.log('I\'m info %d')
-    lger.log('here I come')
-    lger.log('try again')
